@@ -1,0 +1,8 @@
+.letter {
+    border: 2px solid grey;
+    border-radius: 4px;
+    width: 40px;
+    height: 60px;
+    padding: 5 px;
+    resize: none;
+}
