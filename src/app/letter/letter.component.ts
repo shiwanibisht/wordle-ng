@@ -13,4 +13,23 @@ export class LetterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  processKeyPress(event: KeyboardEvent): boolean {
+    // Process backspace separately.
+    if (event.key == "Backspace") {
+      this.value = "";
+      return true;
+    }
+    // Ignore any other keys that are longer than one
+    // character or invalid.
+    if (event.key.length != 1) {
+      return false;
+    }
+
+    if (event.key.match(/[A-Za-z]/)) {
+      this.value = event.key;
+      return true;
+    }
+    return false;
+  }
 }

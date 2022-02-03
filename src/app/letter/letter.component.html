@@ -1,4 +1,3 @@
 <div>
-    <!-- TODO: disallow spaces (having trouble sanitizing input on keypress) -->
-    <input type="text" class="letter" name="index-{{index}}" [ngModel]="value | trim | uppercase" (ngModelChange)="value=$event" maxlength="1" autocomplete="off">
+    <input type="text" class="letter" name="index-{{index}}" [ngModel]="value | trim | uppercase" (keypress)="processKeyPress($event)" maxlength="1" autocomplete="off">
 </div>
