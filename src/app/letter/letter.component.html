@@ -1,3 +1,3 @@
 <div>
-    <input type="text" class="letter" name="index-{{index}}" [ngModel]="value | trim | uppercase" (keypress)="processKeyPress($event)" maxlength="1" autocomplete="off">
+    <input type="text" class="letter" name="index-{{index}}" [ngModel]="value | trim | uppercase" (keypress)="processKeyPress($event.key)" maxlength="1" autocomplete="off">
 </div>
