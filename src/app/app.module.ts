@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TrimPipe } from './trim.pipe';
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent,
     LetterComponent,
     GuessComponent,

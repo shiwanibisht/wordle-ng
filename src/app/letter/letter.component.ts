@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { LetterState } from '../letter-state';
+
 @Component({
   selector: 'app-letter',
   templateUrl: './letter.component.html',
@@ -7,11 +9,26 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LetterComponent implements OnInit {
   @Input() index!: Number;
+  @Input() state: LetterState = LetterState.Unsubmitted;
   public value: string = '';
 
   constructor() {}
 
   ngOnInit(): void {
+  }
+
+  getFillColor(): string {
+    switch (this.state) {
+      case LetterState.NotPresent:
+        return "grey";
+      case LetterState.WrongLocation:
+        return "yellow";
+      case LetterState.RightLocation:
+        return "green";
+      case LetterState.Unsubmitted:
+      default:
+          return "white";
+    }
   }
 
   processKeyPress(eventKey: string | null | undefined): boolean {
