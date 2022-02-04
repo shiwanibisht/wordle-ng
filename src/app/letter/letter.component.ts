@@ -31,6 +31,8 @@ export class LetterComponent implements OnInit {
     }
   }
 
+  isDisabled(): boolean { return this.state != LetterState.Unsubmitted; }
+
   processKeyPress(eventKey: string | null | undefined): boolean {
     // Process backspace separately.
     if (eventKey == "Backspace") {
