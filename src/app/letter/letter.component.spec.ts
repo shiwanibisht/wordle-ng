@@ -26,39 +26,39 @@ describe('LetterComponent', () => {
 
   it('ignores key presses longer than a character', () => {
     expect(component.processKeyPress("something long")).toBeFalse();
-    expect(component.value).toBeFalsy();
+    expect(component.letter.value).toBeFalsy();
   });
 
   it('ignores key presses that are null', () => {
     expect(component.processKeyPress(null)).toBeFalse();
-    expect(component.value).toBeFalsy();
+    expect(component.letter.value).toBeFalsy();
   });
 
   it('ignores key presses that are undefined', () => {
     expect(component.processKeyPress(undefined)).toBeFalse();
-    expect(component.value).toBeFalsy();
+    expect(component.letter.value).toBeFalsy();
   });
 
   it('ignores key presses that are not alphabetical', () => {
     expect(component.processKeyPress("1")).toBeFalse();
-    expect(component.value).toBeFalsy();
+    expect(component.letter.value).toBeFalsy();
   });
 
   it('processes key presses of uppercase letters', () => {
     expect(component.processKeyPress("A")).toBeTrue();
-    expect(component.value.toUpperCase()).toEqual("A");
+    expect(component.letter.value.toUpperCase()).toEqual("A");
   });
 
   it('processes key presses of lowercase letters', () => {
     expect(component.processKeyPress("a")).toBeTrue();
-    expect(component.value.toUpperCase()).toEqual("A");
+    expect(component.letter.value.toUpperCase()).toEqual("A");
   });
 
   it('processes backspace and removes value', () => {
     expect(component.processKeyPress("a")).toBeTrue();
-    expect(component.value.toUpperCase()).toEqual("A");
+    expect(component.letter.value.toUpperCase()).toEqual("A");
     expect(component.processKeyPress("Backspace")).toBeTrue();
-    expect(component.value).toBeFalsy();
+    expect(component.letter.value).toBeFalsy();
   });
 
 });

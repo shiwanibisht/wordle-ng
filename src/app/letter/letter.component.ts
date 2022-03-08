@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { LetterState } from '../letter-state';
+import { Letter } from '../letter';
 
 @Component({
   selector: 'app-letter',
@@ -8,9 +9,7 @@ import { LetterState } from '../letter-state';
   styleUrls: ['./letter.component.css']
 })
 export class LetterComponent implements OnInit {
-  @Input() index!: Number;
-  @Input() state: LetterState = LetterState.Unsubmitted;
-  public value: string = '';
+  @Input() letter!: Letter
 
   constructor() {}
 
@@ -18,7 +17,7 @@ export class LetterComponent implements OnInit {
   }
 
   getFillColor(): string {
-    switch (this.state) {
+    switch (this.letter.state) {
       case LetterState.NotPresent:
         return "grey";
       case LetterState.WrongLocation:
@@ -31,12 +30,12 @@ export class LetterComponent implements OnInit {
     }
   }
 
-  isDisabled(): boolean { return this.state != LetterState.Unsubmitted; }
+  isDisabled(): boolean { return this.letter.state != LetterState.Unsubmitted; }
 
   processKeyPress(eventKey: string | null | undefined): boolean {
     // Process backspace separately.
     if (eventKey == "Backspace") {
-      this.value = "";
+      this.letter.value = "";
       return true;
     }
     // Ignore any other keys that are longer than one
@@ -46,7 +45,7 @@ export class LetterComponent implements OnInit {
     }
 
     if (eventKey.match(/[A-Za-z]/)) {
-      this.value = eventKey;
+      this.letter.value = eventKey;
       return true;
     }
     return false;
