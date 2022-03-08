@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LetterState } from '../letter-state';
 import { Letter } from '../letter';
+import { GoalWord } from '../goal-word';
 
 @Component({
   selector: 'app-guess',
@@ -9,6 +10,7 @@ import { Letter } from '../letter';
 })
 export class GuessComponent implements OnInit {
   @Input() wordLength?: Number;
+  @Input() goal?: GoalWord;
   letters: Letter[] = [];
 
   constructor() {
@@ -24,7 +26,16 @@ export class GuessComponent implements OnInit {
   }
  
   onSubmit(): void {
-    console.log("submit");
+    for (let i = 0; i < (this.wordLength || 0); i++) {
+      let val = this.letters[i].value;
+      if (this.goal?.getAt(i) == val) {
+        this.letters[i].state = LetterState.RightLocation;
+      } else if (this.goal?.contains(val)) {
+        this.letters[i].state = LetterState.WrongLocation;
+      } else {
+        this.letters[i].state = LetterState.NotPresent;
+      }
+    }
   }
 
 }

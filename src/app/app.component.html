@@ -1,1 +1,5 @@
-<app-guess [wordLength]="5"></app-guess>
+<table>
+    <tr *ngFor="let item of [].constructor(numGuesses)">
+        <app-guess [wordLength]="goalWord.length()" [goal]="goalWord"></app-guess>
+    </tr>
+</table>
