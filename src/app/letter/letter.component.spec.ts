@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LetterState } from '../letter-state';
 
 import { TrimPipe } from '../trim.pipe';
 import { LetterComponent } from './letter.component';
@@ -17,6 +18,7 @@ describe('LetterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LetterComponent);
     component = fixture.componentInstance;
+    component.letter = {value: "", state: LetterState.Unsubmitted};
     fixture.detectChanges();
   });
 
