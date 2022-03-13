@@ -32,7 +32,7 @@ module.exports = function(config) {
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        autoWatch: false,
+        autoWatch: true,
         browsers: ['ChromeHeadless', 'ChromeHeadlessCI'],
         customLaunchers: {
             ChromeHeadlessCI: {
@@ -40,7 +40,7 @@ module.exports = function(config) {
                 flags: ['--no-sandbox']
             }
         },
-        singleRun: true,
+        singleRun: false,
         restartOnFileChange: true
     });
 };
