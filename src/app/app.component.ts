@@ -8,7 +8,7 @@ import { GoalWord } from './goal-word';
 })
 export class AppComponent {
   title = 'wordle-ng';
-  numGuesses : Number = 5;
+  numGuesses : Number = 6;
   goalWord: GoalWord = new GoalWord("bangs");
 }
  
