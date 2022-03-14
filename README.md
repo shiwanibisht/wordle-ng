@@ -1,5 +1,8 @@
 # WordleNg
 
+![test workflow](https://github.com/shiwanibisht/wordle-ng/actions/workflows/main.yml/badge.svg)
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.1.
 
 ## Development server
