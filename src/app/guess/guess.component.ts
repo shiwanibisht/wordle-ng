@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { LetterState } from '../letter-state';
 import { Letter } from '../letter';
 import { GoalWord } from '../goal-word';
@@ -9,8 +9,10 @@ import { GoalWord } from '../goal-word';
   styleUrls: ['./guess.component.css']
 })
 export class GuessComponent implements OnInit {
-  @Input() wordLength?: Number;
-  @Input() goal?: GoalWord;
+  @Input() wordLength!: Number;
+  @Input() goal!: GoalWord;
+  @Input() isActive!: boolean;
+  @Output() isActiveChange = new EventEmitter<boolean>();
   letters: Letter[] = [];
 
   constructor() {
@@ -36,6 +38,7 @@ export class GuessComponent implements OnInit {
         this.letters[i].state = LetterState.NotPresent;
       }
     }
+    this.isActive = false;
+    this.isActiveChange.emit(this.isActive);
   }
-
 }

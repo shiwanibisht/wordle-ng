@@ -1,3 +1,3 @@
 <div>
-    <input type="text" class="letter" [ngModel]="letter.value | trim | uppercase" (keypress)="processKeyPress($event.key)" [disabled]="isDisabled()" [style.background-color]="getFillColor()" maxlength="1" autocomplete="off">
+    <input type="text" class="letter" [ngModel]="letter.value | trim | uppercase" (keypress)="processKeyPress($event.key)" [disabled]="!isActive" [style.background-color]="getFillColor()" maxlength="1" autocomplete="off">
 </div>

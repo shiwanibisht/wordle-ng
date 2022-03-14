@@ -29,9 +29,9 @@ describe('LetterComponent', () => {
     fixture = TestBed.createComponent(LetterComponent);
     component = fixture.componentInstance;
     component.letter = {value: "", state: LetterState.Unsubmitted};
+    component.isActive = true;
     input = fixture.nativeElement.querySelector('input');
     fixture.detectChanges();
-    input.focus();
   });
 
   it('should create', () => {
@@ -139,17 +139,13 @@ describe('LetterComponent', () => {
     expect(input.disabled).toBeFalse();
   });
 
-  it('is disabled for input with any submitted state', fakeAsync(() => {
-    const submittedStates = [LetterState.NotPresent, LetterState.RightLocation, LetterState.WrongLocation];
+  it('is disabled if the component isActive is false', fakeAsync(() => {
+    component.isActive = false;
 
-    for (var submittedState of submittedStates) {
-      component.letter = {value: "a", state: submittedState};
+    fixture.detectChanges();
+    tick();
 
-      fixture.detectChanges();
-      tick();
-
-      expect(input.disabled).toBeTrue();
-    }
+    expect(input.disabled).toBeTrue();
   }));
 
 });

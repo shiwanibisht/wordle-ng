@@ -9,7 +9,8 @@ import { Letter } from '../letter';
   styleUrls: ['./letter.component.css']
 })
 export class LetterComponent implements OnInit {
-  @Input() letter!: Letter
+  @Input() letter!: Letter;
+  @Input() isActive!: boolean;
 
   constructor() {}
 
@@ -29,8 +30,6 @@ export class LetterComponent implements OnInit {
           return "white";
     }
   }
-
-  isDisabled(): boolean { return this.letter.state != LetterState.Unsubmitted; }
 
   processKeyPress(eventKey: string | null | undefined): boolean {
     // Process backspace separately.

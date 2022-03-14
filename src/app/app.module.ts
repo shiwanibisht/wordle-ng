@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { EventEmitter, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -22,7 +22,7 @@ import { TrimPipe } from './trim.pipe';
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

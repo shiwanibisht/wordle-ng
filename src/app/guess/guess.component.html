@@ -2,7 +2,7 @@
     <table>
         <tr>
             <th *ngFor="let letter of letters">
-                <app-letter [letter]="letter"></app-letter>
+                <app-letter [letter]="letter" [isActive]="isActive"></app-letter>
             </th>
             <th>
                 <button type="submit">Submit</button>
