@@ -19,7 +19,7 @@ export class GuessComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    for (let i = 0; i < (this.wordLength || 0); i++) {
+    for (let i = 0; i < this.wordLength; i++) {
       this.letters.push({
         value: "",
         state: LetterState.Unsubmitted,
@@ -28,8 +28,19 @@ export class GuessComponent implements OnInit {
   }
  
   onSubmit(): void {
-    for (let i = 0; i < (this.wordLength || 0); i++) {
-      let val = this.letters[i].value;
+    // Concatenate together the guess.
+    let guess = "";
+    for (let i = 0; i < this.wordLength; i++) {
+      guess = guess.concat(this.letters[i].value);
+    }
+
+    if (guess.length != this.wordLength) {
+      // Can't submit yet. Return early.
+      return;
+    }
+
+    for (let i = 0; i < this.wordLength; i++) {
+      let val = guess.charAt(i);
       if (this.goal?.getAt(i) == val) {
         this.letters[i].state = LetterState.RightLocation;
       } else if (this.goal?.contains(val)) {

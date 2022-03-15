@@ -1,11 +1,8 @@
-<form (ngSubmit)="onSubmit()">
+<form (keyup.enter)="onSubmit()">
     <table>
         <tr>
             <th *ngFor="let letter of letters">
                 <app-letter [letter]="letter" [isActive]="isActive"></app-letter>
-            </th>
-            <th>
-                <button type="submit">Submit</button>
             </th>
         </tr>
     </table>
