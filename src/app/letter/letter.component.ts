@@ -27,7 +27,7 @@ export class LetterComponent implements OnInit {
         return "green";
       case LetterState.Unsubmitted:
       default:
-          return "white"; 
+          return "white";
     }
   }
 
