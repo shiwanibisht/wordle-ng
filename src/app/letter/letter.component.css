@@ -1,8 +1,11 @@
 .letter {
     border: 2px solid grey;
     border-radius: 4px;
-    width: 40px;
+    width: 60px;
     height: 60px;
-    padding: 5 px;
+    padding: 5px;
     resize: none;
+    font-weight: bolder;
+    font-size: 2em;
+    text-align: center;
 }
