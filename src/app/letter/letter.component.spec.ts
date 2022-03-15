@@ -5,9 +5,9 @@ import { LetterState } from '../letter-state';
 import { TrimPipe } from '../trim.pipe';
 import { LetterComponent } from './letter.component';
 
-function makeInputKeypress(input: HTMLInputElement, 
+function makeInputKeyDownEvent(input: HTMLInputElement, 
                           keypress: string | undefined): void {
-  input.dispatchEvent(new KeyboardEvent('keypress', {
+  input.dispatchEvent(new KeyboardEvent('keydown', {
     key: keypress,
   }));
 }
@@ -38,8 +38,8 @@ describe('LetterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ignores key presses longer than a character', fakeAsync(() => {
-    makeInputKeypress(input, 'something long');
+  it('ignores key down longer than a character', fakeAsync(() => {
+    makeInputKeyDownEvent(input, 'something long');
 
     fixture.detectChanges();
     tick();
@@ -48,8 +48,8 @@ describe('LetterComponent', () => {
     expect(component.letter.value).toBeFalsy();
   }));
 
-  it('ignores key presses that are undefined', fakeAsync(() => {
-    makeInputKeypress(input, undefined);
+  it('ignores key down that are undefined', fakeAsync(() => {
+    makeInputKeyDownEvent(input, undefined);
 
     fixture.detectChanges();
     tick();
@@ -58,8 +58,8 @@ describe('LetterComponent', () => {
     expect(component.letter.value).toBeFalsy();
   }));
 
-  it('ignores key presses that are not alphabetical', fakeAsync(() => {
-    makeInputKeypress(input, '1');
+  it('ignores key down that are not alphabetical', fakeAsync(() => {
+    makeInputKeyDownEvent(input, '1');
 
     fixture.detectChanges();
     tick();
@@ -68,8 +68,8 @@ describe('LetterComponent', () => {
     expect(component.letter.value).toBeFalsy();
   }));
 
-  it('processes key presses of uppercase letters', fakeAsync(() => {
-    makeInputKeypress(input, "A");
+  it('processes key down of uppercase letters', fakeAsync(() => {
+    makeInputKeyDownEvent(input, "A");
 
     fixture.detectChanges();
     tick();
@@ -78,8 +78,8 @@ describe('LetterComponent', () => {
     expect(component.letter.value.toUpperCase()).toEqual("A");
   })); 
 
-  it('processes key presses of lowercase letters', fakeAsync(() => {
-    makeInputKeypress(input, "a");
+  it('processes key down of lowercase letters', fakeAsync(() => {
+    makeInputKeyDownEvent(input, "a");
 
     fixture.detectChanges();
     tick();
@@ -89,13 +89,13 @@ describe('LetterComponent', () => {
   }));
 
   it('processes backspace and removes value', fakeAsync(() => {
-    makeInputKeypress(input, "a");
+    makeInputKeyDownEvent(input, "a");
 
     fixture.detectChanges();
     tick();
 
     expect(input.value).toEqual("A");
-    makeInputKeypress(input, "Backspace");
+    makeInputKeyDownEvent(input, "Backspace");
 
     fixture.detectChanges();
     tick();

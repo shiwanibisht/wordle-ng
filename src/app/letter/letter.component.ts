@@ -27,11 +27,11 @@ export class LetterComponent implements OnInit {
         return "green";
       case LetterState.Unsubmitted:
       default:
-          return "white";
+          return "white"; 
     }
   }
 
-  processKeyPress(eventKey: string | null | undefined): boolean {
+  processKeyDown(eventKey: string | null | undefined): boolean {
     // Process backspace separately.
     if (eventKey == "Backspace") {
       this.letter.value = "";
