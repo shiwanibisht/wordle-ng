@@ -1,6 +1,7 @@
 import { EventEmitter, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +10,7 @@ import { LetterComponent } from './letter/letter.component';
 import { GuessComponent } from './guess/guess.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TrimPipe } from './trim.pipe';
+import { ShiftFocusDirective } from './shift-focus.directive';
 
 @NgModule({
   declarations: [ 
@@ -16,13 +18,15 @@ import { TrimPipe } from './trim.pipe';
     LetterComponent,
     GuessComponent,
     TrimPipe,
+    ShiftFocusDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
+    ReactiveFormsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

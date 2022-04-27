@@ -1,5 +1,5 @@
 <table>
     <tr *ngFor="let item of [].constructor(numGuesses); index as i">
-        <app-guess [wordLength]="goalWord.length()" [goal]="goalWord" [isActive]="guessActiveStates[i]" (isActiveChange)="changeGuessActiveStates(i)"></app-guess>
+        <app-guess [guessNumber]="i" [wordLength]="goalWord.length()" [goal]="goalWord" [isActive]="guessActiveStates[i]" (isActiveChange)="changeGuessActiveStates(i)"></app-guess>
     </tr>
 </table>

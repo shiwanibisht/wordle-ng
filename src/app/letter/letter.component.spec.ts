@@ -6,10 +6,31 @@ import { TrimPipe } from '../trim.pipe';
 import { LetterComponent } from './letter.component';
 
 function makeInputKeyDownEvent(input: HTMLInputElement, 
-                          keypress: string | undefined): void {
+                         keypress: string | undefined,
+                         valid: boolean,
+                         fixture: ComponentFixture<LetterComponent>): void {
   input.dispatchEvent(new KeyboardEvent('keydown', {
     key: keypress,
   }));
+
+  fixture.detectChanges();
+  tick();
+
+  // TODO: I think using Event.preventDefault in the implementation
+  // would remove the need for this argument.
+  if (!valid) {
+    return;
+  }
+
+  let inputValue: string = keypress || '';
+  if (keypress === 'Backspace') {
+    inputValue = '';
+  }
+  input.value = inputValue;
+  input.dispatchEvent(new InputEvent('input'));
+  
+  fixture.detectChanges();
+  tick();
 }
 
 describe('LetterComponent', () => {
@@ -28,7 +49,7 @@ describe('LetterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LetterComponent);
     component = fixture.componentInstance;
-    component.letter = {value: "", state: LetterState.Unsubmitted};
+    component.letterState = LetterState.Unsubmitted;
     component.isActive = true;
     input = fixture.nativeElement.querySelector('input');
     fixture.detectChanges();
@@ -39,69 +60,42 @@ describe('LetterComponent', () => {
   });
 
   it('ignores key down longer than a character', fakeAsync(() => {
-    makeInputKeyDownEvent(input, 'something long');
-
-    fixture.detectChanges();
-    tick();
+    makeInputKeyDownEvent(input, 'something long',  /*valid=*/false, fixture);
 
     expect(input.value).toBeFalsy();
-    expect(component.letter.value).toBeFalsy();
   }));
 
   it('ignores key down that are undefined', fakeAsync(() => {
-    makeInputKeyDownEvent(input, undefined);
-
-    fixture.detectChanges();
-    tick();
+    makeInputKeyDownEvent(input, undefined, /*valid=*/false, fixture);
 
     expect(input.value).toBeFalsy();
-    expect(component.letter.value).toBeFalsy();
   }));
 
   it('ignores key down that are not alphabetical', fakeAsync(() => {
-    makeInputKeyDownEvent(input, '1');
-
-    fixture.detectChanges();
-    tick();
+    makeInputKeyDownEvent(input, '1', /*valid=*/false, fixture);
 
     expect(input.value).toBeFalsy();
-    expect(component.letter.value).toBeFalsy();
   }));
 
   it('processes key down of uppercase letters', fakeAsync(() => {
-    makeInputKeyDownEvent(input, "A");
-
-    fixture.detectChanges();
-    tick();
+    makeInputKeyDownEvent(input, "A", /*valid=*/true, fixture);
 
     expect(input.value).toEqual("A");
-    expect(component.letter.value.toUpperCase()).toEqual("A");
   })); 
 
   it('processes key down of lowercase letters', fakeAsync(() => {
-    makeInputKeyDownEvent(input, "a");
+    makeInputKeyDownEvent(input, "a", /*valid=*/true, fixture);
 
-    fixture.detectChanges();
-    tick();
-
-    expect(input.value).toEqual("A");
-    expect(component.letter.value.toUpperCase()).toEqual("A");
+    expect(input.value).toEqual("a");
   }));
 
   it('processes backspace and removes value', fakeAsync(() => {
-    makeInputKeyDownEvent(input, "a");
+    makeInputKeyDownEvent(input, "a", /*valid=*/true, fixture);
 
-    fixture.detectChanges();
-    tick();
-
-    expect(input.value).toEqual("A");
-    makeInputKeyDownEvent(input, "Backspace");
-
-    fixture.detectChanges();
-    tick();
+    expect(input.value).toEqual("a");
+    makeInputKeyDownEvent(input, "Backspace", /*valid=*/true, fixture);
 
     expect(input.value).toBeFalsy();
-    expect(component.letter.value).toBeFalsy();
   }));
 
   it('is initially created with a grey background color', () => {
@@ -109,7 +103,7 @@ describe('LetterComponent', () => {
   });
 
   it('has a grey background color if the letter is not present', fakeAsync(() => {
-    component.letter = {value: "a", state: LetterState.NotPresent};
+    component.letterState = LetterState.NotPresent;
     
     fixture.detectChanges();
     tick();
@@ -118,7 +112,7 @@ describe('LetterComponent', () => {
   }));
 
   it('has a yellow background color if the letter is in the wrong location', fakeAsync(() => {
-    component.letter = {value: "a", state: LetterState.WrongLocation};
+    component.letterState = LetterState.WrongLocation;
     
     fixture.detectChanges();
     tick();
@@ -127,7 +121,7 @@ describe('LetterComponent', () => {
   }));
 
   it('has a green background color if the letter is in the right location', fakeAsync(() => {
-    component.letter = {value: "a", state: LetterState.RightLocation};
+    component.letterState = LetterState.RightLocation;
     
     fixture.detectChanges();
     tick();

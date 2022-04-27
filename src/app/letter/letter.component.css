@@ -9,4 +9,5 @@
     font-size: 2em;
     text-align: center;
     caret-color: transparent;
+    text-transform: capitalize;
 }

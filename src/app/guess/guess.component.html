@@ -1,8 +1,10 @@
-<form (keyup.enter)="onSubmit()">
+<form [formGroup]="guessForm" (keyup.enter)="onSubmit()">
     <table>
         <tr>
-            <th *ngFor="let letter of letters">
-                <app-letter [letter]="letter" [isActive]="isActive"></app-letter>
+            <th *ngFor="let letterState of letterStates; let i = index">
+                <div>
+                    <app-letter [appShiftFocus]="wordLength" formControlName="{{i}}" id="l-{{guessNumber}}-{{i}}" [letterState]="letterState" [isActive]="isActive"></app-letter>
+                </div>
             </th>
         </tr>
     </table>

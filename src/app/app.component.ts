@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoalWord } from './goal-word';
+import { ShiftFocusDirective } from './shift-focus.directive';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,9 @@ export class AppComponent implements OnInit {
     let next = index.valueOf() + 1;
     if (next < this.numGuesses) {
       this.guessActiveStates[next] = true;
+      // This is really where I want to shift focus to the
+      // next Guess, or otherwise listen to the same event
+      // that triggers this function to happen in the directive.
     }
   }
 }
